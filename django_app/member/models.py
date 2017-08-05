@@ -10,6 +10,12 @@ class User(AbstractUser):
     USERNAME_FIELD = 'nickname'
     REQUIRED_FIELDS = ['email']
 
+    relations = models.ManyToManyField(
+        'self',
+        through='Relation',
+        symmetrical=False
+    )
+
 
 class Relation(models.Model):
     user1 = models.ForeignKey(User, related_name='request_user')
